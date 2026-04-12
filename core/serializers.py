@@ -7,7 +7,14 @@ class CompanyInfoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CompanyInfo
-        fields = ['id', 'name', 'tagline', 'description', 'hero_title', 'hero_subtitle', 'created_at', 'updated_at']
+        fields = [
+            'id', 'name', 'tagline', 'description',
+            'hero_title', 'hero_subtitle', 'hero_image',
+            'who_we_are_image', 'years_experience', 'projects_completed', 'total_built_area',
+            'contact_email', 'contact_phone', 'contact_address',
+            'instagram_url', 'facebook_url', 'linkedin_url',
+            'created_at', 'updated_at'
+        ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
 

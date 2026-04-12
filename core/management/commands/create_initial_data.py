@@ -15,7 +15,19 @@ class Command(BaseCommand):
                 tagline='Designing Tomorrow\'s Spaces Today',
                 description='We are a leading architecture firm specializing in innovative, sustainable, and beautiful designs. Our team of experienced architects brings your vision to life with precision and creativity.',
                 hero_title='Welcome to Architecture Studio',
-                hero_subtitle='Where Vision Meets Precision in Every Design'
+                hero_subtitle='Where Vision Meets Precision in Every Design',
+                # Who We Are Section
+                years_experience=15,
+                projects_completed=150,
+                total_built_area='500,000+ m²',
+                # Contact Section
+                contact_email='hello@archstudio.com',
+                contact_phone='+1 (555) 123-4567',
+                contact_address='123 Architecture Ave, Design City, DC 12345',
+                # Footer Social Media
+                instagram_url='https://instagram.com/archstudio',
+                facebook_url='https://facebook.com/archstudio',
+                linkedin_url='https://linkedin.com/company/archstudio',
             )
             self.stdout.write(self.style.SUCCESS('✓ Company info created'))
         else:

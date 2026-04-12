@@ -10,22 +10,55 @@ from . import user_admin
 class CompanyInfoAdmin(admin.ModelAdmin):
     """Admin interface for CompanyInfo model."""
     
-    list_display = ['name', 'tagline', 'created_at', 'updated_at']
-    search_fields = ['name', 'tagline', 'description']
-    readonly_fields = ['id', 'created_at', 'updated_at']
+    list_display = ['name', 'tagline', 'years_experience', 'projects_completed', 'contact_email', 'updated_at']
+    search_fields = ['name', 'tagline', 'description', 'contact_email', 'contact_phone']
+    readonly_fields = ['id', 'created_at', 'updated_at', 'hero_image_preview', 'who_we_are_image_preview']
     
     fieldsets = (
         ('Basic Information', {
             'fields': ('name', 'tagline', 'description')
         }),
         ('Hero Section', {
-            'fields': ('hero_title', 'hero_subtitle')
+            'fields': ('hero_title', 'hero_subtitle', 'hero_image', 'hero_image_preview'),
+            'description': 'Configure the hero section content and background image'
+        }),
+        ('Who We Are Section', {
+            'fields': ('who_we_are_image', 'who_we_are_image_preview', 'years_experience', 'projects_completed', 'total_built_area'),
+            'description': 'Set the company statistics and section image'
+        }),
+        ('Contact Information', {
+            'fields': ('contact_email', 'contact_phone', 'contact_address'),
+            'description': 'Contact details displayed in the Contact section'
+        }),
+        ('Social Media Links', {
+            'fields': ('instagram_url', 'facebook_url', 'linkedin_url'),
+            'description': 'Social media profile URLs for the footer'
         }),
         ('Metadata', {
             'fields': ('id', 'created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
     )
+    
+    def hero_image_preview(self, obj):
+        """Preview of hero image."""
+        if obj.hero_image:
+            return format_html(
+                '<img src="{}" width="400" style="max-width: 100%; border-radius: 8px;" />',
+                obj.hero_image.url
+            )
+        return "No hero image uploaded"
+    hero_image_preview.short_description = "Hero Image Preview"
+    
+    def who_we_are_image_preview(self, obj):
+        """Preview of who we are image."""
+        if obj.who_we_are_image:
+            return format_html(
+                '<img src="{}" width="400" style="max-width: 100%; border-radius: 8px;" />',
+                obj.who_we_are_image.url
+            )
+        return "No image uploaded"
+    who_we_are_image_preview.short_description = "Who We Are Image Preview"
     
     def has_add_permission(self, request):
         # Allow only one CompanyInfo record

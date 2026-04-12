@@ -6,11 +6,33 @@ class CompanyInfo(models.Model):
     """Stores general company information displayed on the landing page."""
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    # Basic Info
     name = models.CharField(max_length=200, help_text="Company name")
     tagline = models.CharField(max_length=300, help_text="Short tagline or slogan")
     description = models.TextField(help_text="Detailed company description")
+    
+    # Hero Section
     hero_title = models.CharField(max_length=300, help_text="Main hero section title")
     hero_subtitle = models.CharField(max_length=500, help_text="Hero section subtitle")
+    hero_image = models.ImageField(upload_to='hero/', null=True, blank=True, help_text="Hero section background image")
+    
+    # Who We Are Section
+    who_we_are_image = models.ImageField(upload_to='who_we_are/', null=True, blank=True, help_text="Who We Are section image")
+    years_experience = models.PositiveIntegerField(default=0, help_text="Years of experience")
+    projects_completed = models.PositiveIntegerField(default=0, help_text="Number of projects completed")
+    total_built_area = models.CharField(max_length=100, default='', help_text="Total built area (e.g., '500,000+ m²')")
+    
+    # Contact Section
+    contact_email = models.EmailField(default='', help_text="Contact email address")
+    contact_phone = models.CharField(max_length=50, default='', help_text="Contact phone number")
+    contact_address = models.TextField(default='', help_text="Company address")
+    
+    # Footer Social Media
+    instagram_url = models.URLField(default='', blank=True, help_text="Instagram profile URL")
+    facebook_url = models.URLField(default='', blank=True, help_text="Facebook page URL")
+    linkedin_url = models.URLField(default='', blank=True, help_text="LinkedIn profile URL")
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
