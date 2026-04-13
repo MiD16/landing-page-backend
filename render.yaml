@@ -1,0 +1,25 @@
+services:
+  # This configuration is for Render.com deployment
+  # Note: Render provides managed PostgreSQL, so we don't need a db service here
+  
+  web:
+    type: web
+    runtime: docker
+    plan: free
+    # Render automatically sets PORT environment variable
+    # Your app should bind to 0.0.0.0:$PORT
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    # Override the entrypoint for Render
+    dockerCommand: ["bash", "/app/render-entrypoint.sh"]
+    
+    # Environment variables (set these in Render dashboard)
+    # SECRET_KEY
+    # DEBUG=False  
+    # ALLOWED_HOSTS=your-app-name.onrender.com
+    # DB_NAME (from Render PostgreSQL)
+    # DB_USER (from Render PostgreSQL) 
+    # DB_PASSWORD (from Render PostgreSQL)
+    # DB_HOST (from Render PostgreSQL)
+    # DB_PORT=5432
+    # CORS_ALLOWED_ORIGINS=https://your-frontend-domain.com

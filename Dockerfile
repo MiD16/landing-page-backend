@@ -23,11 +23,12 @@ RUN pip install --upgrade pip \
 # Copy project
 COPY . /app/
 
-# Make entrypoint executable
-RUN chmod +x /app/entrypoint.sh
+# Make entrypoints executable
+RUN chmod +x /app/entrypoint.sh /app/render-entrypoint.sh
 
-# Expose port
+# Expose port (Render uses $PORT environment variable, typically 10000)
 EXPOSE 8000
 
-# Run entrypoint script with bash
-ENTRYPOINT ["bash", "/app/entrypoint.sh"]
+# Use render-specific entrypoint for Render.com deployment
+# You can change this back to entrypoint.sh for local development
+ENTRYPOINT ["bash", "/app/render-entrypoint.sh"]
