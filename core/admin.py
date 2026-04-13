@@ -66,6 +66,9 @@ class CompanyInfoAdmin(admin.ModelAdmin):
             return False
         return super().has_add_permission(request)
 
+    def has_delete_permission(self, request, obj=None):
+        # Forbid deleting CompanyInfo records
+        return False  # Forbid deleting CompanyInfo records
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
